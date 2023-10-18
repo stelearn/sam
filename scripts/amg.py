@@ -21,17 +21,26 @@ parser = argparse.ArgumentParser(
     )
 )
 
+# input_path = "../plain_split_jpg/train"
+# out_path = "../mask/train"
+# input_path = "../plain_split_jpg/vali"
+# out_path = "../mask/vali"
+input_path = "../plain_split_jpg/test"
+out_path = "../mask/test"
+
 parser.add_argument(
     "--input",
     type=str,
-    required=True,
+    required=False,
+    default=input_path,
     help="Path to either a single input image or folder of images.",
 )
 
 parser.add_argument(
     "--output",
     type=str,
-    required=True,
+    required=False,
+    default=out_path,
     help=(
         "Path to the directory where masks will be output. Output will be either a folder "
         "of PNGs per image or a single json with COCO-style masks."
@@ -41,18 +50,27 @@ parser.add_argument(
 parser.add_argument(
     "--model-type",
     type=str,
-    required=True,
+    required=False,
+    default="vit_h",
     help="The type of model to load, in ['default', 'vit_h', 'vit_l', 'vit_b']",
 )
 
 parser.add_argument(
     "--checkpoint",
+    default="../sam_vit_h_4b8939.pth",
     type=str,
-    required=True,
+    required=False,
     help="The path to the SAM checkpoint to use for mask generation.",
 )
 
-parser.add_argument("--device", type=str, default="cuda", help="The device to run generation on.")
+parser.add_argument("--device", type=str, default="cpu", help="The device to run generation on.")
+
+#
+#
+#
+#
+#
+#
 
 parser.add_argument(
     "--convert-to-rle",
